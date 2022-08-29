@@ -14,7 +14,7 @@ class AppInfo extends StatelessWidget {
             body: Column(
               children: [
                 AppHeader(
-                  title: "application info",
+                  title: "application_info",
                   shouldShowBackButton: true,
                   shouldShowSettingButton: false,
                 )

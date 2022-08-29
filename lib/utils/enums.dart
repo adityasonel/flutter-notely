@@ -8,6 +8,7 @@ enum Settings {
   SHARE,
   SUPPORT,
   APPLICATION_INFO,
+  ABOUT_DEVELOPER,
   RATING,
   LOGOUT
 }

@@ -21,10 +21,10 @@ class Utils {
   };
 
   static SnackBar _toastSnackbar(String text,
-      [SnackbarTypes type = SnackbarTypes.INFO, int duration = 1200]) {
+      [SnackbarTypes type = SnackbarTypes.INFO, int duration = 3]) {
     return SnackBar(
       backgroundColor: snackbarColors[type],
-      duration: Duration(microseconds: duration),
+      duration: Duration(seconds: duration),
       content: Text(
         text,
         style: TextStyle(
@@ -39,7 +39,7 @@ class Utils {
       {required ScaffoldMessengerState messengerState,
       required String text,
       SnackbarTypes type = SnackbarTypes.INFO,
-      int duration = 1200}) {
+      int duration = 3}) {
     messengerState.showSnackBar(_toastSnackbar(text, type, duration));
   }
 
@@ -47,7 +47,7 @@ class Utils {
       {required BuildContext context,
       required String text,
       SnackbarTypes type = SnackbarTypes.INFO,
-      int duration = 1200}) {
+      int duration = 3}) {
     ScaffoldMessenger.of(context)
         .showSnackBar(_toastSnackbar(text, type, duration));
   }

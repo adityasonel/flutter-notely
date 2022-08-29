@@ -19,8 +19,9 @@ class Settings extends StatelessWidget {
     app_enums.Settings.SHARE: Icons.share_rounded,
     app_enums.Settings.SUPPORT: Icons.contact_support_rounded,
     app_enums.Settings.APPLICATION_INFO: Icons.info_outline,
-    app_enums.Settings.RATING: Icons.rate_review_rounded,
-    app_enums.Settings.LOGOUT: Icons.logout_rounded
+    app_enums.Settings.ABOUT_DEVELOPER: Icons.account_circle_outlined
+    // app_enums.Settings.RATING: Icons.rate_review_rounded,
+    // app_enums.Settings.LOGOUT: Icons.logout_rounded
   };
 
   final actions = {
@@ -136,6 +137,17 @@ class Settings extends StatelessWidget {
           );
         }
         break;
+      case app_enums.Settings.ABOUT_DEVELOPER:
+        final Uri launchUri =
+            Uri(scheme: "https", path: "adityasonel.github.io");
+
+        if (await canLaunchUrl(launchUri)) {
+          launchUrl(launchUri);
+        } else {
+          Utils.toast(
+              context: context, text: "Some error occured, please try again!");
+        }
+        break;
       case app_enums.Settings.RATING:
         final Uri launchUri =
             Uri(scheme: "https", path: "adityasonel.github.io");
@@ -182,7 +194,7 @@ class Settings extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      key.name,
+                      key.name.toLowerCase(),
                       style: TextStyle(
                         color: AppColors.whiteColor,
                         fontSize: 25,

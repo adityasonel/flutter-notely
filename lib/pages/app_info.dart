@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:notely/components/app_header.dart';
+import 'package:notely/app_widgets/app_header.dart';
 import 'package:notely/utils/app_colors.dart';
 
-class Trash extends StatelessWidget {
-  const Trash({Key? key}) : super(key: key);
+class AppInfo extends StatelessWidget {
+  const AppInfo({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class Trash extends StatelessWidget {
             body: Column(
               children: [
                 AppHeader(
-                  title: "trash",
+                  title: "application_info",
                   shouldShowBackButton: true,
                   shouldShowSettingButton: false,
                 )

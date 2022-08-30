@@ -1,12 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:notely/containers/app_info.dart';
-import 'package:notely/containers/trash.dart';
+import 'package:notely/pages/app_info.dart';
+import 'package:notely/pages/trash.dart';
 import 'package:notely/http/requests.dart';
 import 'package:notely/models/norris_fact.dart';
 import 'package:notely/utils/app_colors.dart';
-import 'package:notely/components/app_header.dart';
+import 'package:notely/app_widgets/app_header.dart';
 import 'package:notely/utils/enums.dart' as app_enums;
 import 'package:notely/utils/utils.dart';
 import 'package:url_launcher/url_launcher.dart';

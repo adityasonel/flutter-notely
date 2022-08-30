@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notely/components/app_header.dart';
+import 'package:notely/app_widgets/app_header.dart';
 import 'package:notely/utils/app_colors.dart';
 
 class NewNote extends StatelessWidget {

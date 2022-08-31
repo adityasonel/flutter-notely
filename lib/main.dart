@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:notely/containers/home.dart';
 import 'package:notely/utils/app_colors.dart';
+import 'package:notely/utils/utils.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(fontFamily: Utils.appFontFamily),
       home: Home(),
     );
   }

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:notely/components/app_header.dart';
 import 'package:notely/utils/app_colors.dart';
 
-class AppInfo extends StatelessWidget {
-  const AppInfo({Key? key}) : super(key: key);
+class FolderNotes extends StatelessWidget {
+  const FolderNotes({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class AppInfo extends StatelessWidget {
             body: Column(
               children: [
                 AppHeader(
-                  title: "application info",
+                  title: "notes",
                   shouldShowBackButton: true,
                   shouldShowSettingButton: false,
                 )

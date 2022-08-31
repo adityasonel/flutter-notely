@@ -53,7 +53,6 @@ class AppHeader extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 16),
                   child: Text(title.isNotEmpty ? title : "notely",
                       style: TextStyle(
-                          fontFamily: Utils.appFontFamily,
                           color: AppColors.whiteColor,
                           fontWeight: FontWeight.bold,
                           fontSize: 41)),

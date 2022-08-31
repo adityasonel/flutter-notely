@@ -14,7 +14,7 @@ class NewNote extends StatelessWidget {
             body: Column(
               children: [
                 AppHeader(
-                  title: "new_note",
+                  title: "new note",
                   shouldShowBackButton: true,
                   shouldShowSettingButton: false,
                 )

@@ -53,7 +53,6 @@ class Settings extends StatelessWidget {
                     value,
                     style: TextStyle(
                         color: AppColors.blackColor,
-                        fontFamily: Utils.appFontFamily,
                         fontSize: 24,
                         fontWeight: FontWeight.w700),
                   ),
@@ -71,7 +70,6 @@ class Settings extends StatelessWidget {
                       child: Text("Close",
                           style: TextStyle(
                               color: AppColors.blackColor,
-                              fontFamily: Utils.appFontFamily,
                               fontSize: 20,
                               fontWeight: FontWeight.w700)),
                     ))
@@ -206,11 +204,10 @@ class Settings extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                key.name.toLowerCase(),
+                                key.name.replaceAll("_", " ").toLowerCase(),
                                 style: TextStyle(
                                   color: AppColors.whiteColor,
                                   fontSize: 25,
-                                  fontFamily: Utils.appFontFamily,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
@@ -238,7 +235,7 @@ class Settings extends StatelessWidget {
                 ),
                 Expanded(
                     child: Padding(
-                  padding: EdgeInsets.only(top: 24),
+                  padding: EdgeInsets.all(16),
                   child: ListView.builder(
                     itemCount: settings.length,
                     itemBuilder: (BuildContext context, int index) {

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:notely/models/norris_fact.dart';
 
 class Requests {
@@ -14,7 +14,7 @@ class Requests {
     final url = Uri.parse(
         'https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random');
 
-    final response = await http.get(url, headers: headersList);
+    final response = await get(url, headers: headersList);
     print("getNorrisFact - response: $response");
 
     if (response.statusCode >= 200 && response.statusCode < 300) {

@@ -182,9 +182,9 @@ class Settings extends StatelessWidget {
 
     return AnimationConfiguration.staggeredList(
         position: index,
-        duration: Duration(milliseconds: 1280),
+        duration: Duration(milliseconds: 480),
         child: SlideAnimation(
-            duration: Duration(milliseconds: 580),
+            duration: Duration(milliseconds: 380),
             child: FadeInAnimation(
                 child: GestureDetector(
                     onTap: () {
@@ -239,13 +239,11 @@ class Settings extends StatelessWidget {
                 Expanded(
                     child: Padding(
                   padding: EdgeInsets.only(top: 24),
-                  child: AnimationLimiter(
-                    child: ListView.builder(
-                      itemCount: settings.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return buildSettingItem(context, index);
-                      },
-                    ),
+                  child: ListView.builder(
+                    itemCount: settings.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return buildSettingItem(context, index);
+                    },
                   ),
                 ))
               ],

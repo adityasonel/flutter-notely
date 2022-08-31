@@ -1,3 +1,8 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'note.g.dart';
+
+@JsonSerializable()
 class Note {
   final int id;
   final String content;
@@ -14,7 +19,7 @@ class Note {
       required this.createdAt,
       required this.updatedAt});
 
-  @override
-  List<Object> get props =>
-      [id, content, folder, createdAt, updatedAt, isAddedToTrash];
+  factory Note.fromJson(Map<String, dynamic> json) => _$NoteFromJson(json);
+
+  Map<String, dynamic> toJson() => _$NoteToJson(this);
 }

@@ -35,16 +35,13 @@ dependencies:
     share_plus: ^4.0.10+1
     url_launcher: ^6.1.5
     flutter_staggered_animations: ^1.1.1
+    json_annotation: ^4.6.0
 
 dev_dependencies:
     flutter_test:
         sdk: flutter
-
-    # The "flutter_lints" package below contains a set of recommended lints to
-    # encourage good coding practices. The lint set provided by the package is
-    # activated in the `analysis_options.yaml` file located at the root of your
-    # package. See that file for information about deactivating specific lint
-    # rules and activating additional ones.
+    json_serializable: ^6.3.1
+    build_runner: ^2.2.0
     flutter_lints: ^2.0.0
 
 # For information on the generic Dart part of this file, see the

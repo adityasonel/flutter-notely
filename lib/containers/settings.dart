@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:notely/containers/app_info.dart';
 import 'package:notely/containers/trash.dart';
 import 'package:notely/http/requests.dart';
@@ -173,50 +174,53 @@ class Settings extends StatelessWidget {
     }
   }
 
-  List<Widget> settingListItem(BuildContext context) {
-    var list = <Widget>[];
+  AnimationConfiguration buildSettingItem(context, index) {
+    final keys = settings.keys.toList();
 
-    settings.forEach((key, value) {
-      list.add(
-        GestureDetector(
-            onTap: () {
-              onPressSettings(context, key);
-            },
-            child: Container(
-              margin: const EdgeInsets.only(top: 5, bottom: 5),
-              width: double.infinity,
-              height: 98,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Utils.appBorderRadius),
-                color: Colors.white10,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 24, right: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      key.name.toLowerCase(),
-                      style: TextStyle(
-                        color: AppColors.whiteColor,
-                        fontSize: 25,
-                        fontFamily: Utils.appFontFamily,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    Icon(
-                      value,
-                      color: AppColors.whiteColor,
-                    )
-                  ],
-                ),
-              ),
-            )),
-      );
-    });
+    final key = keys[index];
+    final value = settings[keys[index]];
 
-    return list;
+    return AnimationConfiguration.staggeredList(
+        position: index,
+        duration: Duration(milliseconds: 1280),
+        child: SlideAnimation(
+            duration: Duration(milliseconds: 580),
+            child: FadeInAnimation(
+                child: GestureDetector(
+                    onTap: () {
+                      onPressSettings(context, key);
+                    },
+                    child: Container(
+                        margin: const EdgeInsets.only(top: 5, bottom: 5),
+                        width: double.infinity,
+                        height: 98,
+                        decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(Utils.appBorderRadius),
+                          color: Colors.white10,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 24, right: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                key.name.toLowerCase(),
+                                style: TextStyle(
+                                  color: AppColors.whiteColor,
+                                  fontSize: 25,
+                                  fontFamily: Utils.appFontFamily,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              Icon(
+                                value,
+                                color: AppColors.whiteColor,
+                              )
+                            ],
+                          ),
+                        ))))));
   }
 
   @override
@@ -235,10 +239,13 @@ class Settings extends StatelessWidget {
                 Expanded(
                     child: Padding(
                   padding: EdgeInsets.only(top: 24),
-                  child: ListView(
-                    padding:
-                        const EdgeInsets.only(left: 16, right: 16, bottom: 48),
-                    children: settingListItem(context),
+                  child: AnimationLimiter(
+                    child: ListView.builder(
+                      itemCount: settings.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return buildSettingItem(context, index);
+                      },
+                    ),
                   ),
                 ))
               ],

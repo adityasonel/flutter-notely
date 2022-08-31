@@ -36,44 +36,47 @@ class Settings extends StatelessWidget {
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(Utils.appBorderRadius)),
       child: ConstrainedBox(
-        constraints: BoxConstraints(
-          minHeight: 180.0,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(32.0),
-              child: Text(
-                value,
-                style: TextStyle(
-                    color: AppColors.blackColor,
-                    fontFamily: Utils.appFontFamily,
-                    fontSize: 32,
-                    fontWeight: FontWeight.w700),
-              ),
-            ),
-            TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                style: ButtonStyle(
-                  overlayColor: MaterialStateProperty.all(Colors.transparent),
+          constraints: BoxConstraints(
+            minHeight: 180.0,
+          ),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(32.0),
+                  child: Text(
+                    value,
+                    style: TextStyle(
+                        color: AppColors.blackColor,
+                        fontFamily: Utils.appFontFamily,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w700),
+                  ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text("Close",
-                      style: TextStyle(
-                          color: AppColors.blackColor,
-                          fontFamily: Utils.appFontFamily,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700)),
-                ))
-          ],
-        ),
-      ),
+                TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    style: ButtonStyle(
+                      overlayColor:
+                          MaterialStateProperty.all(Colors.transparent),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text("Close",
+                          style: TextStyle(
+                              color: AppColors.blackColor,
+                              fontFamily: Utils.appFontFamily,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700)),
+                    ))
+              ],
+            ),
+          )),
     );
 
     return dialog;
@@ -233,7 +236,8 @@ class Settings extends StatelessWidget {
                     child: Padding(
                   padding: EdgeInsets.only(top: 24),
                   child: ListView(
-                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    padding:
+                        const EdgeInsets.only(left: 16, right: 16, bottom: 48),
                     children: settingListItem(context),
                   ),
                 ))

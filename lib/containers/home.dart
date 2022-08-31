@@ -6,15 +6,42 @@ import 'package:notely/utils/app_colors.dart';
 import 'package:notely/components/app_header.dart';
 import 'package:notely/utils/utils.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _Home();
+}
+
+class _Home extends State<Home> {
+  bool isLoading = true;
 
   onPressFloatingButton(BuildContext context) {
     Navigator.push(context, MaterialPageRoute(builder: (context) => NewNote()));
   }
 
   @override
+  void initState() {
+    Future.delayed(const Duration(seconds: 3), () {
+      setState(() {
+        isLoading = false;
+      });
+    });
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return SafeArea(
+          child: Center(
+        child: CircularProgressIndicator(
+          color: Colors.white,
+        ),
+      ));
+    }
+
     return SafeArea(
         bottom: true,
         child: Scaffold(

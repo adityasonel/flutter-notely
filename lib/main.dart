@@ -1,12 +1,15 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:notely/containers/home.dart';
 import 'package:notely/utils/app_colors.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -20,7 +23,7 @@ class MyApp extends StatelessWidget {
             Brightness.dark // Dark == white status bar -- for IOS.
         ));
 
-    return MaterialApp(
+    return CupertinoApp(
       debugShowCheckedModeBanner: false,
       home: Home(),
     );

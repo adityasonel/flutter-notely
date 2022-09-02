@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:notely/components/app_header.dart';
+import 'package:notely/models/folder.dart';
 import 'package:notely/utils/app_colors.dart';
 
 class FolderNotes extends StatelessWidget {
-  const FolderNotes({Key? key}) : super(key: key);
+  const FolderNotes({Key? key, required this.folder}) : super(key: key);
+
+  final Folder folder;
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +17,12 @@ class FolderNotes extends StatelessWidget {
             body: Column(
               children: [
                 AppHeader(
-                  title: "notes",
+                  title: folder.title,
                   shouldShowBackButton: true,
                   shouldShowSettingButton: false,
-                )
+                ),
+                Text(folder.toString(),
+                    style: const TextStyle(color: Colors.amber, fontSize: 32))
               ],
             )));
   }

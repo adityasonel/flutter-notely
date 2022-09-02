@@ -2,8 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:notely/components/folder_list_item.dart';
 import 'package:notely/containers/folder_notes.dart';
 import 'package:notely/containers/new_note.dart';
+import 'package:notely/models/folder.dart';
 import 'package:notely/utils/app_colors.dart';
 import 'package:notely/components/app_header.dart';
 import 'package:notely/utils/utils.dart';
@@ -15,24 +17,52 @@ class Home extends StatefulWidget {
   State<StatefulWidget> createState() => _Home();
 }
 
-class TempFolder {
-  String name;
-  String count;
-
-  TempFolder({required this.name, required this.count});
-}
-
 class _Home extends State<Home> {
   bool isLoading = true;
 
   var tempFolders = [
-    TempFolder(name: "personal notes", count: "24"),
-    TempFolder(name: "feelings", count: "123"),
-    TempFolder(name: "morning pages", count: "1"),
-    TempFolder(name: "great ideas", count: "0"),
-    TempFolder(name: "drafts", count: "3"),
-    TempFolder(name: "reminders", count: "32"),
-    TempFolder(name: "todo", count: "54")
+    Folder(
+        id: 0,
+        title: "personal notes",
+        itemCount: 24,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now()),
+    Folder(
+        id: 1,
+        title: "feelings",
+        itemCount: 123,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now()),
+    Folder(
+        id: 2,
+        title: "morning pages",
+        itemCount: 1,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now()),
+    Folder(
+        id: 3,
+        title: "great ideas",
+        itemCount: 0,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now()),
+    Folder(
+        id: 4,
+        title: "drafts",
+        itemCount: 3,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now()),
+    Folder(
+        id: 5,
+        title: "reminders",
+        itemCount: 32,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now()),
+    Folder(
+        id: 6,
+        title: "todo",
+        itemCount: 5,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now())
   ];
 
   onPressFloatingButton(BuildContext context) {
@@ -104,59 +134,11 @@ class _Home extends State<Home> {
                           itemBuilder: (context, index) {
                             final item = tempFolders[index];
 
-                            return GestureDetector(
-                              onTap: () {
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) => FolderNotes()));
-                                Get.to(FolderNotes());
-                              },
-                              child: Container(
-                                height: 158,
-                                decoration: BoxDecoration(
-                                    color: Colors.white10,
-                                    borderRadius: BorderRadius.circular(
-                                        Utils.appBorderRadius)),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 8, left: 16, right: 8),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            item.name,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                                color: Colors.white70,
-                                                fontSize: 15),
-                                          ),
-                                          Icon(
-                                            Icons.chevron_right_rounded,
-                                            size: 32,
-                                            color: Colors.white70,
-                                          )
-                                        ],
-                                      ),
-                                      Text(item.count,
-                                          style: TextStyle(
-                                              fontSize: 70,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold))
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            );
+                            return FolderListItem(
+                                folder: item,
+                                onPress: () => Get.to(
+                                      FolderNotes(folder: item),
+                                    ));
                           }),
                     ),
                   )

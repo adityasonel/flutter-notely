@@ -33,7 +33,7 @@ class SettingListItem extends StatelessWidget {
                     child: Container(
                         margin: const EdgeInsets.only(top: 5, bottom: 5),
                         width: double.infinity,
-                        height: 98,
+                        height: 128,
                         decoration: BoxDecoration(
                           borderRadius:
                               BorderRadius.circular(Utils.appBorderRadius),

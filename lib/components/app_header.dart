@@ -31,48 +31,59 @@ class AppHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: BoxConstraints(
-          minHeight: shouldShowBackButton ? 0 : 64, minWidth: double.infinity),
+      constraints: BoxConstraints(minHeight: 91, minWidth: double.infinity),
       child: Container(
-        color: AppColors.blackColor,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            shouldShowBackButton
-                ? IconButton(
-                    onPressed: () {
-                      onBackButtonPressed(context);
-                    },
-                    icon: const Icon(Icons.keyboard_backspace_rounded,
-                        color: AppColors.whiteColor))
-                : Container(),
-            Row(
+          color: Colors.black,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 16),
-                  child: Text(title.isNotEmpty ? title : "notely",
-                      style: TextStyle(
-                          color: AppColors.whiteColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 41)),
+                Row(
+                  children: [
+                    shouldShowBackButton
+                        ? Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.white30),
+                            ),
+                            child: IconButton(
+                                onPressed: () {
+                                  onBackButtonPressed(context);
+                                },
+                                icon: const Icon(
+                                    Icons.keyboard_backspace_rounded,
+                                    color: Colors.white)),
+                          )
+                        : Container(),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: shouldShowBackButton ? 16.0 : 0.0),
+                      child: Text(title.isNotEmpty ? title : "notely",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 41)),
+                    )
+                  ],
                 ),
                 shouldShowSettingButton
-                    ? IconButton(
-                        onPressed: () {
-                          onSettingButtonPressed(context);
-                        },
-                        icon: Icon(
-                          Icons.settings,
-                          color: AppColors.whiteColor,
-                        ))
+                    ? Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white30),
+                        ),
+                        child: IconButton(
+                            onPressed: () {
+                              onSettingButtonPressed(context);
+                            },
+                            icon: Icon(
+                              Icons.settings,
+                              color: Colors.white,
+                            )),
+                      )
                     : Container()
               ],
-            )
-          ],
-        ),
-      ),
+            ),
+          )),
     );
   }
 }

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:notely/components/fact_dialog.dart';
 import 'package:notely/components/setting_list_item.dart';
 import 'package:notely/containers/app_info.dart';
 import 'package:notely/containers/trash.dart';
@@ -14,7 +15,7 @@ import 'package:notely/utils/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
 
-class Settings extends StatelessWidget {
+class Settings extends StatefulWidget {
   final settings = {
     app_enums.Settings.AN_NORRIS_FACT: Icons.local_fire_department_sharp,
     app_enums.Settings.TRASH: Icons.archive_outlined,
@@ -26,89 +27,42 @@ class Settings extends StatelessWidget {
     // app_enums.Settings.LOGOUT: Icons.logout_rounded
   };
 
-  final actions = {
-    app_enums.Settings.TRASH: Trash(),
-    app_enums.Settings.APPLICATION_INFO: AppInfo()
-  };
-
   Settings({super.key});
 
-  Dialog factDialog(context, value) {
-    final dialog = Dialog(
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(Utils.appBorderRadius)),
-      child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minHeight: 180.0,
-          ),
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(32.0),
-                  child: Text(
-                    value,
-                    style: TextStyle(
-                        color: AppColors.blackColor,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w700),
-                  ),
-                ),
-                TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    style: ButtonStyle(
-                      overlayColor:
-                          MaterialStateProperty.all(Colors.transparent),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text("Close",
-                          style: TextStyle(
-                              color: AppColors.blackColor,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700)),
-                    ))
-              ],
-            ),
-          )),
-    );
+  @override
+  State<StatefulWidget> createState() => _Settings();
+}
 
-    return dialog;
-  }
+class _Settings extends State<Settings> {
+  int loadingIndex = -1;
 
-  void onPressSettings(BuildContext context, String key) async {
-    debugPrint(key);
-    final action = actions[key];
-
+  void onPressSettings(BuildContext context, String key, int index) async {
     if (key == app_enums.Settings.AN_NORRIS_FACT.name) {
       try {
+        setState(() {
+          loadingIndex = 0;
+        });
         Utils.toast(context: context, text: "Fetching...");
         Fact fact = await Requests.getFact();
         debugPrint("completed - fact - ${fact.value}");
         showDialog(
             context: context,
-            builder: (BuildContext context) => factDialog(context, fact.value));
+            builder: (BuildContext context) => FactDialog(value: fact.value));
+
+        setState(() {
+          loadingIndex = -1;
+        });
       } on Exception catch (error) {
+        setState(() {
+          loadingIndex = -1;
+        });
         Utils.toast(
             context: context,
             text: error.toString(),
             type: app_enums.SnackbarTypes.ERROR);
       }
-    } else if (key == app_enums.Settings.TRASH.name ||
-        key == app_enums.Settings.ABOUT_DEVELOPER.name) {
-      if (action != null) {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(builder: (context) => action),
-        // );
-        Get.to(action);
-      }
+    } else if (key == app_enums.Settings.TRASH.name) {
+      Get.to(Trash());
     } else if (key == app_enums.Settings.SHARE.name) {
       Share.share(
           "hey, notely is an awesome notes application build on flutter. check it out here: https://adityasonel.github.io");
@@ -152,6 +106,8 @@ class Settings extends StatelessWidget {
           context: context,
           text: app_enums.Settings.LOGOUT.toString(),
           type: app_enums.SnackbarTypes.ERROR);
+    } else if (key == app_enums.Settings.ABOUT_DEVELOPER.name) {
+      Get.to(AppInfo());
     }
   }
 
@@ -170,21 +126,23 @@ class Settings extends StatelessWidget {
                 ),
                 Expanded(
                     child: Padding(
-                  padding: EdgeInsets.all(16),
+                  padding:
+                      EdgeInsets.only(right: 16, bottom: 16, left: 16, top: 12),
                   child: ListView.builder(
-                    itemCount: settings.length,
+                    itemCount: widget.settings.length,
                     itemBuilder: (BuildContext context, int index) {
-                      final keys = settings.keys.toList();
+                      final keys = widget.settings.keys.toList();
 
                       final key = keys[index];
-                      final icon = settings[keys[index]];
+                      final icon = widget.settings[keys[index]];
 
                       return SettingListItem(
                         index: index,
                         title: key.name,
                         icon: icon,
+                        loadingIndex: loadingIndex,
                         onPress: (context, title) =>
-                            onPressSettings(context, title),
+                            onPressSettings(context, title, index),
                       );
                       // buildSettingItem(context, index);
                     },

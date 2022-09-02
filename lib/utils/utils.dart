@@ -5,7 +5,7 @@ import 'package:notely/utils/enums.dart';
 
 class Utils {
   static const appFontFamily = "EuclidCircularB";
-  static const appBorderRadius = 12.0;
+  static const appBorderRadius = 0.0;
 
   static String? encodeQueryParameters(Map<String, String> params) {
     return params.entries

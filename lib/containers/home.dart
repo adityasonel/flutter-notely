@@ -86,7 +86,7 @@ class _Home extends State<Home> {
     if (isLoading) {
       return Center(
         child: CircularProgressIndicator(
-          color: Colors.white,
+          color: Colors.white24,
         ),
       );
     }
@@ -111,7 +111,7 @@ class _Home extends State<Home> {
                 },
                 child: Icon(
                   Icons.add,
-                  color: AppColors.whiteColor,
+                  color: Colors.white,
                 ),
               ),
             ),

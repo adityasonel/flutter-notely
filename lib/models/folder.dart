@@ -1,8 +1,3 @@
-import 'package:json_annotation/json_annotation.dart';
-
-part 'folder.g.dart';
-
-@JsonSerializable()
 class Folder {
   int id;
   String title;
@@ -17,7 +12,19 @@ class Folder {
       required this.createdAt,
       required this.updatedAt});
 
-  factory Folder.fromJson(Map<String, dynamic> json) => _$FolderFromJson(json);
+  factory Folder.fromJson(Map<String, dynamic> json) => Folder(
+        id: json['id'] as int,
+        title: json['title'] as String,
+        itemCount: json['itemCount'] as int,
+        createdAt: DateTime.parse(json['createdAt'] as String),
+        updatedAt: DateTime.parse(json['updatedAt'] as String),
+      );
 
-  Map<String, dynamic> toJson() => _$FolderToJson(this);
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'id': id,
+        'title': title,
+        'itemCount': itemCount,
+        'createdAt': createdAt.toIso8601String(),
+        'updatedAt': updatedAt.toIso8601String(),
+      };
 }

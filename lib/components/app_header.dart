@@ -1,9 +1,9 @@
 // ignore_for_file: must_be_immutable, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:notely/containers/settings.dart';
 import 'package:notely/utils/app_colors.dart';
-import 'package:notely/utils/utils.dart';
 
 class AppHeader extends StatelessWidget {
   bool shouldShowBackButton = false;
@@ -21,10 +21,11 @@ class AppHeader extends StatelessWidget {
   }
 
   void onSettingButtonPressed(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => Settings()),
-    );
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => Settings()),
+    // );
+    Get.to(Settings());
   }
 
   @override

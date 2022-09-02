@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/route_manager.dart';
 import 'package:notely/containers/home.dart';
 import 'package:notely/utils/app_colors.dart';
 import 'package:notely/utils/utils.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
             Brightness.dark // Dark == white status bar -- for IOS.
         ));
 
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: Utils.appFontFamily),
       home: Home(),

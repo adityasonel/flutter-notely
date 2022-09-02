@@ -1,10 +1,11 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
-import 'package:notely/models/norris_fact.dart';
+import 'package:notely/models/fact.dart';
 
 class Requests {
-  static Future<NorrisFact> getNorrisFact() async {
+  static Future<Fact> getFact() async {
     final headersList = {
       'Accept': '*/*',
       'User-Agent': 'Thunder Client (https://www.thunderclient.com)',
@@ -15,10 +16,10 @@ class Requests {
         'https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random');
 
     final response = await get(url, headers: headersList);
-    print("getNorrisFact - response: $response");
+    debugPrint("getNorrisFact - body: ${response.body}");
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
-      return NorrisFact.fromJson(jsonDecode(response.body));
+      return Fact.fromJson(jsonDecode(response.body));
     } else {
       throw Exception(response.reasonPhrase.toString());
     }

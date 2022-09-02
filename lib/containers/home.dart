@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:get/route_manager.dart';
 import 'package:notely/containers/folder_notes.dart';
 import 'package:notely/containers/new_note.dart';
 import 'package:notely/utils/app_colors.dart';
@@ -36,7 +36,8 @@ class _Home extends State<Home> {
   ];
 
   onPressFloatingButton(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => NewNote()));
+    // Navigator.push(context, MaterialPageRoute(builder: (context) => NewNote()));
+    Get.to(NewNote());
   }
 
   @override
@@ -105,10 +106,11 @@ class _Home extends State<Home> {
 
                             return GestureDetector(
                               onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => FolderNotes()));
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) => FolderNotes()));
+                                Get.to(FolderNotes());
                               },
                               child: Container(
                                 height: 158,
